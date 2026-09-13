@@ -1,0 +1,12 @@
+# Ambiente Python e uv
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Dados e relatórios derivados (reproduzíveis localmente)
+data/processed/
+reports/
+
+# Sistema operacional
+.DS_Store

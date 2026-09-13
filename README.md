@@ -1,17 +1,41 @@
-# **Analysing Historical Data on Fatalities between Israelis and Palestinians**
+# Análise de Fatalidades no Conflito Israelense-Palestino
 
-Much has been said about the conflicts between Israel and Palestine over disputed territory. Obviously, Palestine is the weaker side in this conflict, seeking the right to guaranteed sovereignty in the region from international bodies such as the UN (United Nations Organisation), of which they claim to be the true owners of the region belonging to the state of Israel. It is also worth remembering the existence of terrorist groups in the region, such as Hamas, which seeks the destruction of the state of Israel, and it is worth remembering that these terrorists, although they are Palestinians, do not represent the Palestinian state. Both sides claim to be the owners of that region, however in this analysis, we will restrain ourselves to analysing only the number of fatalities in this region.
+Projeto de análise exploratória de dados, em Python, sobre registros individuais de fatalidades entre 2000 e setembro de 2023.
 
-## **Objective:**
+## Estrutura
 
+```text
+data/
+├── raw/                         # Fonte original em CSV
+└── processed/                   # Base preparada (gerada localmente)
+notebooks/
+├── 01_preprocessamento.ipynb    # Limpeza, validação e criação de variáveis
+└── 02_analise_exploratoria.ipynb# Perguntas, tabelas e visualizações
+src/
+├── data_processing.py           # Carregamento e preparação dos dados
+└── analysis_utils.py            # Tabelas e gráficos reutilizáveis
+```
 
-To analyse the numbers of fatalities in the region. The data was catalogued from 2000 to 2023.
+## Executar com uv
 
+```bash
+uv sync
+uv run jupyter lab
+```
 
-**Data source:** [Fatalities in the Israeli & Palestinian](https://www.kaggle.com/datasets/willianoliveiragibin/fatalities-in-the-israeli-palestinian/code)
+Execute primeiro `notebooks/01_preprocessamento.ipynb` e, em seguida, `notebooks/02_analise_exploratoria.ipynb`.
 
+Também é possível reproduzir o pré-processamento sem abrir o Jupyter:
 
-**Region to be analysed:**
+```bash
+uv run python -c "from src.data_processing import carregar_dados, preparar_dados, salvar_dados_processados; salvar_dados_processados(preparar_dados(carregar_dados()))"
+```
 
-![Fonte: The Globe Post](https://theglobepost.com/wp-content/uploads/2018/11/Israel-and-Gaza.jpg)
+## Metodologia
 
+- O arquivo bruto é preservado em `data/raw/`.
+- Dados ausentes não recebem valores presumidos: campos categóricos são marcados como `Desconhecido`, e a idade ausente permanece ausente.
+- A análise temporal utiliza o ano do óbito; a data do evento continua disponível para comparação.
+- O projeto é descritivo e não estabelece causalidade, responsabilidade legal ou completude da base.
+
+Veja [PROJECT_GUIDE.md](PROJECT_GUIDE.md) para escopo, limitações e fonte dos dados.
