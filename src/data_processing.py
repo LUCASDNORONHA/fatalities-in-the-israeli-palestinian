@@ -43,7 +43,7 @@ def preparar_dados(dados_brutos: pd.DataFrame) -> pd.DataFrame:
         "gender", "took_part_in_the_hostilities", "type_of_injury", "ammunition",
         "place_of_residence", "place_of_residence_district",
     ]:
-        dados[coluna] = dados[coluna].fillna("Desconhecido")
+        dados[coluna] = dados[coluna].replace("Unknown", "Desconhecido").fillna("Desconhecido")
 
     dados["ano_evento"] = dados["date_of_event"].dt.year
     dados["ano_obito"] = dados["date_of_death"].dt.year
